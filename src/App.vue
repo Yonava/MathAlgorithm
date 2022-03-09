@@ -1,6 +1,7 @@
 <template>
   <div>
     <button v-on:click="questions()">Generate Questions</button>
+    <input type="range" min="2" max="15" v-model="max">{{max}}
     <h1>{{ equation }}</h1>
     <h1 v-for="i in output" :key="i.id">{{ i }}</h1>
   </div>
@@ -8,21 +9,23 @@
 
 <script>
 import GenerateQuestions from './assets/QuestionAssembler'
-//import Arithmetic from './classes/Arithematic'
+//import Arithematic from './classes/Arithematic'
 
 export default {
   name: 'App',
   data: () => {
     return {
       output: [],
-      equation: ''
+      equation: '',
+      max: 0
     }
   },
   components: {
   },
   methods: {
     questions() {
-      this.output = GenerateQuestions([5, 1], 2)
+      this.output = GenerateQuestions()
+      //this.equation = Arithematic.BaseEq('*', 2, parseInt(this.max));
     }
   }
 }

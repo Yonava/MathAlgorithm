@@ -2,7 +2,7 @@ import Arithematic from "@/classes/Arithematic";
 
 export default function levelOne() {
     
-    const basicOperators = ['+', '-', '*'];
+    const basicOperators = ['+', '-', '*', '/'];
 
     const template = [
         `${Arithematic.BaseEq(basicOperators[Math.floor(Math.random() * basicOperators.length)])}`,
