@@ -2,11 +2,11 @@ import randNum from "@/classes/RandNum";
 import levelOne from "./Level1";
 import levelTwo from "./Level2";
 import levelThree from "./Level3";
+import Algebra from "./AlgebraTemplate"
 
 
-export default function GenerateQuestions(numOfQuestions = [3, 3, 3], numOfOptions = 4) {
+export default function GenerateQuestions(numOfQuestions = [1, 1, 1, 1], numOfOptions = 4) {
 
-    
     let questionObject;
     let output = [];
 
@@ -27,9 +27,14 @@ export default function GenerateQuestions(numOfQuestions = [3, 3, 3], numOfOptio
                 case 2:
                     question = levelThree();
                     break;
+                case 3:
+                    question = Algebra();
+                    break;
             }
 
-            options.push(eval(question));
+            question.evaluation = question.evaluation ?? question.equation;
+            question.task = question.task ?? "Evaluate";
+            options.push(eval(question.evaluation));
 
             if (parseFloat(options[0]) % 1 != 0) options[0] = Number(parseFloat(options).toFixed(2));
 
@@ -39,18 +44,20 @@ export default function GenerateQuestions(numOfQuestions = [3, 3, 3], numOfOptio
                 if (options[0] % 1 === 0) {
                     do {
                         newOption = Math.round((options[0] + mixIn) * randNum(0.5, 1.5, 2));
-                        mixIn++;
+                        Math.random() < .5 ? mixIn++:mixIn--;
                     } while (options.includes(newOption))
                     options.push(newOption);
                 } else {
                     newOption = ((options[0] + mixIn) * randNum(0.5, 1.5, 2)).toFixed(2);
-                    mixIn++;
+                    Math.random() < .5 ? mixIn++:mixIn--;
                     options.push(Number(newOption));
                 }
             }
 
             questionObject = {
-                question,
+                equation: question.equation,
+                task: question.task,
+                answer: options[0],
                 options,
             };
 

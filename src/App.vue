@@ -3,14 +3,12 @@
     <button v-on:click="questions()">Generate Questions</button>
     <input type="range" min="2" max="15" v-model="max">{{max}}
     <h1>{{ equation }}</h1>
-    <h1 v-for="i in output" :key="i.id">{{ i }}</h1>
+    <h1 v-for="i in output" :key="i.id">{{i}}</h1>
   </div>
 </template>
 
 <script>
-import GenerateQuestions from './assets/QuestionAssembler'
-//import Arithematic from './classes/Arithematic'
-
+import GenerateProblems from './assets/QuestionAssembler'
 export default {
   name: 'App',
   data: () => {
@@ -24,8 +22,7 @@ export default {
   },
   methods: {
     questions() {
-      this.output = GenerateQuestions()
-      //this.equation = Arithematic.BaseEq('*', 2, parseInt(this.max));
+      this.output = GenerateProblems()
     }
   }
 }
